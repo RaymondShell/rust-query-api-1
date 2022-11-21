@@ -34,6 +34,7 @@ pub struct QueryDatabaseItem {
     pub enchants: Vec<String>,
     pub bin: bool,
     pub bids: Vec<Bid>,
+    pub category: String,
 }
 
 impl From<Row> for QueryDatabaseItem {
@@ -49,6 +50,7 @@ impl From<Row> for QueryDatabaseItem {
             enchants: row.get("enchants"),
             bin: row.get("bin"),
             bids: row.get("bids"),
+            category: row.get("category"),
         }
     }
 }
@@ -215,6 +217,7 @@ pub struct Auction {
     pub item_bytes: String,
     pub bin: bool,
     pub bids: Vec<Bid>,
+    pub category: String,
 }
 
 #[derive(Deserialize)]

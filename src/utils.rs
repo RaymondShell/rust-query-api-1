@@ -208,6 +208,7 @@ pub async fn update_query_database(
             Type::TEXT_ARRAY,
             Type::BOOL,
             BID_ARRAY.lock().await.to_owned().unwrap(),
+            Type::TEXT,
         ],
     );
 
@@ -226,6 +227,7 @@ pub async fn update_query_database(
             &m.enchants,
             &m.bin,
             &m.bids,
+            &m.category,
         ];
 
         copy_writer.as_mut().write(&row).await?;

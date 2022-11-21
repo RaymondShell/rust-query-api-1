@@ -406,6 +406,7 @@ fn parse_auctions(
                     enchants,
                     bin: auction.bin,
                     bids,
+                    category: auction.category,
                 });
             }
         }

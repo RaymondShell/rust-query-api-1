@@ -386,6 +386,7 @@ async fn query(config: Arc<Config>, req: Request<Body>) -> hyper::Result<Respons
     let mut end: i64 = -1;
     let mut bids = String::new();
     let mut bin = Option::None;
+    let mut category = String::new();
 
     // Reads the query parameters from the request and stores them in the corresponding variable
     for query_pair in Url::parse(&format!(
@@ -417,6 +418,7 @@ async fn query(config: Arc<Config>, req: Request<Body>) -> hyper::Result<Respons
                 Ok(bin_bool) => bin = Some(bin_bool),
                 Err(e) => return bad_request(&format!("Error parsing bin parameter: {}", e)),
             },
+            "category" => category = query_pair.1.to_string(),
             _ => {}
         }
     }
@@ -481,6 +483,14 @@ async fn query(config: Arc<Config>, req: Request<Body>) -> hyper::Result<Respons
             }
             sql.push_str(format!(" end_t > ${}", param_count).as_str());
             param_vec.push(&end);
+            param_count += 1;
+        }
+        if !category.is_empty() {
+            if param_count != 1 {
+                sql.push_str(" AND");
+            }
+            sql.push_str(format!(" category = ${}", param_count).as_str());
+            param_vec.push(&category);
             param_count += 1;
         }
         let bin_unwrapped;
