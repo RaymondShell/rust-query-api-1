@@ -367,7 +367,7 @@ fn parse_auctions(
                         } else {
                             profit = (*past_bin_price.value() as f64 - auction.starting_bid) - (*past_bin_price.value() as f64 * 0.01)
                         }
-                        if profit > 100000 {
+                        if profit > 500000.0 {
                             under_bin_prices.insert(
                                 auction.uuid.clone(),
                                 json!({
