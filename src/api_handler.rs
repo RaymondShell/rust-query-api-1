@@ -363,9 +363,9 @@ fn parse_auctions(
                     if let Some(past_bin_price) = past_bin_prices.get(&internal_id) {
                         let mut profit = 0.0;
                         if auction.starting_bid >= 1000000 {
-                            profit = (*past_bin_price.value() as f64 - auction.starting_bid) - (*past_bin_price.value() as f64 * 0.02)
+                            profit = ((*past_bin_price.value() as i64) - auction.starting_bid) as f64 - (*past_bin_price.value() as f64) * 0.02;
                         } else {
-                            profit = (*past_bin_price.value() as f64 - auction.starting_bid) - (*past_bin_price.value() as f64 * 0.01)
+                            profit = ((*past_bin_price.value() as i64) - auction.starting_bid) as f64 - (*past_bin_price.value() as f64) * 0.01;
                         }
                         if profit > 500000.0 {
                             under_bin_prices.insert(
