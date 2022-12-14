@@ -361,11 +361,11 @@ fn parse_auctions(
                     && !auction.item_name.contains("Minion Skin")
                 {
                     if let Some(past_bin_price) = past_bin_prices.get(&internal_id) {
-                        let profit = 0
+                        let mut profit = 0.0;
                         if auction.starting_bid >= 1000000 {
-                            profit = (*past_bin_price.value() - auction.starting_bid) - (*past_bin_price.value() * 0.02)
+                            profit = (*past_bin_price.value() as f64 - auction.starting_bid) - (*past_bin_price.value() as f64 * 0.02)
                         } else {
-                            profit = (*past_bin_price.value() - auction.starting_bid) - (*past_bin_price.value() * 0.01)
+                            profit = (*past_bin_price.value() as f64 - auction.starting_bid) - (*past_bin_price.value() as f64 * 0.01)
                         }
                         if profit > 100000 {
                             under_bin_prices.insert(
